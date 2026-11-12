@@ -1,0 +1,29 @@
+menus:
+  Registration
+  Login
+  Main Menu:
+    - Search & Matching
+    - Meeting Management
+    - Client Profiles
+  Profile Menu:
+    - Edit Profile
+    - Partner Requirements
+    - Deactivate Account
+  Archive:
+    - Active Couples
+    - Move to Archive
+    - Deleted Clients
+
+logic:
+  - Registration & Validation:
+      - Check uniqueness of the registration number
+      - Validate profile data (gender, registration date, personal details)
+  - Matching Algorithm:
+      - Filter potential candidates by gender and compatibility criteria
+      - Select a subset of suitable candidates according to partner requirements
+  - Meeting Management:
+      - Generate dating invitations between candidates
+      - Manage meeting statuses (pending, accepted, rejected)
+  - Archive & Deletion Logic:
+      - Move couples who successfully resolved their family issues to the archive
+      - Delete clients who opted out of the services
