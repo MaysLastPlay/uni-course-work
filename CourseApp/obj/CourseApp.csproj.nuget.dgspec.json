@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\VS University Code\\смооп\\semester2\\CourseApp\\CourseApp.csproj": {}
+    "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\CourseApp.csproj": {}
   },
   "projects": {
-    "E:\\VS University Code\\смооп\\semester2\\CourseApp\\CourseApp.csproj": {
+    "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\CourseApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\VS University Code\\смооп\\semester2\\CourseApp\\CourseApp.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\CourseApp.csproj",
         "projectName": "CourseApp",
-        "projectPath": "E:\\VS University Code\\смооп\\semester2\\CourseApp\\CourseApp.csproj",
+        "projectPath": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\CourseApp.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "E:\\VS University Code\\смооп\\semester2\\CourseApp\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,7 +41,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.400"
+        "SdkAnalysisLevel": "11.0.100"
       },
       "frameworks": {
         "net10.0-windows": {
@@ -66,7 +66,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.404/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
