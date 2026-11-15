@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CourseApp.classes
+namespace CourseApp.classes.information
 {
     public class PRequirements
     {

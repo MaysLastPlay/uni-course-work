@@ -3,28 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\meetinginvitation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\meetinginvitation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\services\\datingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\services\\datingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\windows\\mainmenu\\adminwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:windows\\mainmenu\\adminwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\information\\prequirements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\information\\prequirements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\prequirements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\prequirements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\information\\meetinginvitation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\information\\meetinginvitation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\information\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\information\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\classes\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:classes\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\windows\\mainmenu\\clientwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:windows\\mainmenu\\clientwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\windows\\mainmenu\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:windows\\mainmenu\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|c:\\users\\asus\\source\\repos\\mayslastplay\\uni-course-work\\courseapp\\windows\\mainmenu\\clientwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6B43181F-6855-B23A-9E06-8C1E17DA195F}|CourseApp.csproj|solutionrelative:windows\\mainmenu\\clientwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,50 +61,16 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PRequirements.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\PRequirements.cs",
-              "RelativeDocumentMoniker": "classes\\PRequirements.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\PRequirements.cs",
-              "RelativeToolTip": "classes\\PRequirements.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-15T17:41:17.65Z",
-              "EditorCaption": "",
-              "OwnerCaption": "%2"
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Client.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\Client.cs",
-              "RelativeDocumentMoniker": "classes\\Client.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\Client.cs",
-              "RelativeToolTip": "classes\\Client.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-15T17:40:24.492Z",
-              "EditorCaption": "",
-              "OwnerCaption": "%2"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MeetingInvitation.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\MeetingInvitation.cs",
-              "RelativeDocumentMoniker": "classes\\MeetingInvitation.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\MeetingInvitation.cs",
-              "RelativeToolTip": "classes\\MeetingInvitation.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-15T17:39:45.231Z",
-              "EditorCaption": "",
-              "OwnerCaption": "%2"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Enums.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\Enums.cs",
               "RelativeDocumentMoniker": "classes\\Enums.cs",
@@ -102,28 +84,124 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-11-12T14:30:16.051Z",
+              "DocumentIndex": 4,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\information\\Client.cs",
+              "RelativeDocumentMoniker": "classes\\information\\Client.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\information\\Client.cs",
+              "RelativeToolTip": "classes\\information\\Client.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T17:40:24.492Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MeetingInvitation.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\information\\MeetingInvitation.cs",
+              "RelativeDocumentMoniker": "classes\\information\\MeetingInvitation.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\information\\MeetingInvitation.cs",
+              "RelativeToolTip": "classes\\information\\MeetingInvitation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T17:39:45.231Z",
               "EditorCaption": "",
               "OwnerCaption": "%2"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAQwFcAAAAgAAAAAAAAAA==",
+              "Title": "PRequirements.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\information\\PRequirements.cs",
+              "RelativeDocumentMoniker": "classes\\information\\PRequirements.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\information\\PRequirements.cs",
+              "RelativeToolTip": "classes\\information\\PRequirements.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-12T14:30:11.728Z",
+              "WhenOpened": "2026-11-15T17:41:17.65Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\AdminWindow.xaml.cs",
+              "RelativeDocumentMoniker": "windows\\mainmenu\\AdminWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\AdminWindow.xaml.cs*",
+              "RelativeToolTip": "windows\\mainmenu\\AdminWindow.xaml.cs*",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAowDcAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T18:13:40.431Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DatingService.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\services\\DatingService.cs",
+              "RelativeDocumentMoniker": "classes\\services\\DatingService.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\classes\\services\\DatingService.cs*",
+              "RelativeToolTip": "classes\\services\\DatingService.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T18:17:01.106Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-11-15T18:23:27.519Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ClientWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\ClientWindow.xaml.cs",
+              "RelativeDocumentMoniker": "windows\\mainmenu\\ClientWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\ClientWindow.xaml.cs",
+              "RelativeToolTip": "windows\\mainmenu\\ClientWindow.xaml.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAswAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T18:09:51.696Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AdminWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\AdminWindow.xaml",
+              "RelativeDocumentMoniker": "windows\\mainmenu\\AdminWindow.xaml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\AdminWindow.xaml",
+              "RelativeToolTip": "windows\\mainmenu\\AdminWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-11-15T18:12:52.607Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ClientWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\ClientWindow.xaml",
+              "RelativeDocumentMoniker": "windows\\mainmenu\\ClientWindow.xaml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\MaysLastPlay\\uni-course-work\\CourseApp\\windows\\mainmenu\\ClientWindow.xaml",
+              "RelativeToolTip": "windows\\mainmenu\\ClientWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-11-15T18:07:53.148Z",
               "EditorCaption": "",
               "OwnerCaption": "%2"
             }
