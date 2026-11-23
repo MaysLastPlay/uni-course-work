@@ -1,58 +1,79 @@
-﻿using CourseApp.classes.information;
+﻿using CourseApp.classes.enums;
+using CourseApp.classes.information;
 using CourseApp.classes.services.CourseApp.classes;
+using CourseApp.windows.authentication;
+using CourseApp.windows.views;
 using System.Windows;
 
 namespace CourseApp.windows.mainmenu
 {
     public partial class ClientWindow : Window
     {
-        private Client _currentClient;
-        private DatingService _datingService;
+        private readonly Client _currentClient;
+        private readonly DatingService _datingService;
 
         public ClientWindow(Client currentClient, DatingService datingService)
         {
             InitializeComponent();
-
             _currentClient = currentClient;
             _datingService = datingService;
 
-            LoadUserData();
-            LoadCandidates();
+            UpdateClientHeader();
+            UpdateSidebarBadges();
+            NavMatches.IsChecked = true;
         }
 
-        private void LoadUserData()
+        public void UpdateClientHeader()
         {
-            TxtFullName.Text = _currentClient.FullName;
-            TxtRegNumber.Text = _currentClient.RegNumber;
-            TxtPersonalDetails.Text = string.IsNullOrWhiteSpace(_currentClient.PersonalDetails)
-                ? "Інформація відсутня."
-                : _currentClient.PersonalDetails;
+            ClientNameText.Text = _currentClient.FullName;
+            ClientMetaText.Text = $"{_currentClient.RegNumber} • {_currentClient.Age} років";
         }
 
-        private void LoadCandidates()
+        public void UpdateSidebarBadges()
         {
-            var candidates = _datingService.RunMatchingAlgorithm(_currentClient);
-            CandidatesDataGrid.ItemsSource = candidates;
+            int matchesCount = _datingService.FindMatchesForClient(_currentClient, false, "").Count;
+            MatchesBadgeText.Text = matchesCount.ToString();
+            MatchesBadge.Visibility = matchesCount > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            int pendingCount = _datingService.GetPendingIncomingCount(_currentClient.RegNumber ?? "");
+            MeetingsBadgeText.Text = pendingCount.ToString();
+            MeetingsBadge.Visibility = pendingCount > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        private void BtnProposeMeeting_Click(object sender, RoutedEventArgs e)
+        private void OnProfileUpdated()
         {
-            if (CandidatesDataGrid.SelectedItem is Client targetClient)
+            if (_currentClient.Status != ClientStatus.Active)
             {
-                _datingService.CreateMeetingInvitation(_currentClient, targetClient);
-                MessageBox.Show($"Запрошення для {targetClient.FullName} успішно надіслано!",
-                                "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoginWindow loginWindow = new LoginWindow(_datingService);
+                loginWindow.Show();
+                Close();
+                return;
             }
-            else
-            {
-                MessageBox.Show("Будь ласка, оберіть кандидата зі списку.",
-                                "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+
+            UpdateClientHeader();
+            UpdateSidebarBadges();
+        }
+
+        private void NavMatches_Checked(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ClientMatchesView(_currentClient, _datingService, UpdateSidebarBadges);
+        }
+
+        private void NavMeetings_Checked(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ClientMeetingsView(_currentClient, _datingService, UpdateSidebarBadges);
+        }
+
+        private void NavProfile_Checked(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ProfileMenuView(_datingService, OnProfileUpdated);
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            LoginWindow loginWindow = new LoginWindow(_datingService);
+            loginWindow.Show();
+            Close();
         }
     }
 }

@@ -12,6 +12,115 @@
         <SolidColorBrush x:Key="TextMuted" Color="#7F8C8D"/>
         <SolidColorBrush x:Key="BorderColor" Color="#EAEAEA"/>
 
+        <Style x:Key="LocalComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="ItemBorder" Background="Transparent" CornerRadius="6" Padding="{TemplateBinding Padding}" Margin="3,1">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#FFF0F3"/>
+                                <Setter Property="Foreground" Value="#FF4B72"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#FFF0F3"/>
+                                <Setter Property="Foreground" Value="#FF4B72"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource LocalComboBoxItemStyle}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Focusable="False"
+                                          ClickMode="Press"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="MainBorder"
+                                                Background="White"
+                                                BorderBrush="#EAEAEA"
+                                                BorderThickness="1"
+                                                CornerRadius="8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="28"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path x:Name="Arrow"
+                                                      Grid.Column="1"
+                                                      Data="M 0 0 L 4 4 L 8 0"
+                                                      Stroke="#7F8C8D"
+                                                      StrokeThickness="1.6"
+                                                      StrokeStartLineCap="Round"
+                                                      StrokeEndLineCap="Round"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#FFB3C3"/>
+                                                <Setter TargetName="Arrow" Property="Stroke" Value="#FF4B72"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#FF4B72"/>
+                                                <Setter TargetName="Arrow" Property="Stroke" Value="#FF4B72"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+
+                            <ContentPresenter IsHitTestVisible="False"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                              Margin="12,0,28,0"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="None">
+                                <Border Background="White"
+                                        BorderBrush="#EAEAEA"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        MinWidth="{TemplateBinding ActualWidth}"
+                                        Margin="0,4,0,0"
+                                        Padding="0,3">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="MenuButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#555"/>
@@ -111,44 +220,133 @@
             </ScrollViewer>
         </Border>
 
-        <Grid Grid.Column="1" Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Column="1">
+            <Grid x:Name="SearchMatchingView" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Margin="0,0,0,15">
-                <TextBlock Text="Search &amp; Matching: Підбір кандидатів" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextDark}"/>
-                <TextBlock Text="Виберіть підмножину підходящих кандидатур відповідно до вимог клієнта" FontSize="12" Foreground="{StaticResource TextMuted}" Margin="0,3,0,10"/>
+                <StackPanel Grid.Row="0" Margin="0,0,0,15">
+                    <TextBlock Text="Search &amp; Matching: Підбір кандидатів" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextDark}"/>
+                    <TextBlock Text="Виберіть підмножину підходящих кандидатур відповідно до вимог клієнта" FontSize="12" Foreground="{StaticResource TextMuted}" Margin="0,3,0,12"/>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Поточний клієнт (замовник):" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,10,0"/>
-                    <ComboBox x:Name="CurrentClientComboBox" Width="220" Height="30" DisplayMemberPath="FullName"/>
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Поточний клієнт (замовник):" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="{StaticResource TextDark}" Margin="0,0,10,0"/>
+                            <ComboBox x:Name="CurrentClientComboBox" Width="280" Height="34" DisplayMemberPath="FullName"/>
+                        </StackPanel>
+
+                        <Border Background="{StaticResource BrandColorLight}" CornerRadius="12" Padding="12,6" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <TextBlock x:Name="TxtCandidatesCount" Text="Знайдено: 0" Foreground="{StaticResource BrandColor}" FontWeight="Bold" FontSize="12"/>
+                        </Border>
+                    </DockPanel>
                 </StackPanel>
-            </StackPanel>
 
-            <Border Grid.Row="1" Background="White" CornerRadius="12" Padding="10">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="15" ShadowDepth="3" Direction="270" Color="#10000000"/>
-                </Border.Effect>
-                <DataGrid x:Name="CandidatesDataGrid" 
-                          AutoGenerateColumns="True" 
-                          CanUserAddRows="False" 
-                          IsReadOnly="True"
-                          HeadersVisibility="Column"
-                          Background="Transparent" 
-                          BorderBrush="Transparent" 
-                          RowHeight="45"/>
-            </Border>
+                <Grid Grid.Row="1">
+                    <ListBox x:Name="CandidatesListBox"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="4,2,6,10"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border x:Name="CardBorder"
+                                                    Background="White"
+                                                    BorderBrush="#EAEAEA"
+                                                    BorderThickness="1.5"
+                                                    CornerRadius="12"
+                                                    Padding="16">
+                                                <Border.Effect>
+                                                    <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Color="#0D000000"/>
+                                                </Border.Effect>
+                                                <ContentPresenter/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="CardBorder" Property="BorderBrush" Value="#FFB3C3"/>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="CardBorder" Property="BorderBrush" Value="{StaticResource BrandColor}"/>
+                                                    <Setter TargetName="CardBorder" Property="Background" Value="#FFF9FA"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-                <Button x:Name="BtnCreateMeeting" 
-                        Content="📅 Сформувати запрошення на зустріч" 
-                        Width="265" Height="42" 
-                        Background="#2ECC71" 
-                        Style="{StaticResource ActionButtonStyle}"/>
-            </StackPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" Width="54" Height="54" CornerRadius="27" Background="{StaticResource BrandColorLight}" Margin="0,0,15,0" VerticalAlignment="Top">
+                                        <TextBlock Text="♥" FontSize="22" Foreground="{StaticResource BrandColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <DockPanel Margin="0,0,0,4">
+                                            <TextBlock Text="{Binding FullName}" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextDark}"/>
+                                            <TextBlock Text="{Binding Age, StringFormat=', {0} р.'}" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource BrandColor}"/>
+
+                                            <Border Background="#F2F4F7" CornerRadius="6" Padding="8,2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding RegNumber}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource TextMuted}"/>
+                                            </Border>
+                                        </DockPanel>
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                            <Border Background="{StaticResource BrandColorLight}" CornerRadius="6" Padding="8,2">
+                                                <TextBlock Text="{Binding Gender}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource BrandColor}"/>
+                                            </Border>
+                                        </StackPanel>
+
+                                        <TextBlock Text="{Binding PersonalDetails}"
+                                                   FontSize="13"
+                                                   Foreground="#555"
+                                                   TextWrapping="Wrap"
+                                                   MaxHeight="42"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Border x:Name="EmptyStatePanel" Background="White" CornerRadius="12" Padding="30" Visibility="Collapsed">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="3" Direction="270" Color="#10000000"/>
+                        </Border.Effect>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="💔" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                            <TextBlock Text="Поки що немає підходящих кандидатів" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextDark}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Для обраного клієнта не знайдено збігів за заданими критеріями." FontSize="13" Foreground="{StaticResource TextMuted}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button x:Name="BtnCreateMeeting"
+                            Content="📅 Сформувати запрошення на зустріч"
+                            Width="265" Height="42"
+                            Background="#2ECC71"
+                            Style="{StaticResource ActionButtonStyle}"/>
+                </StackPanel>
+            </Grid>
+
+            <ContentControl x:Name="ActiveViewHost" Visibility="Collapsed"/>
         </Grid>
 
         <Border Grid.Column="2" Background="#FFFFFF" BorderBrush="{StaticResource BorderColor}" BorderThickness="1,0,0,0">
@@ -163,43 +361,39 @@
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
                     <StackPanel>
-                        <Ellipse Width="90" Height="90" Margin="0,0,0,15" HorizontalAlignment="Center">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://picsum.photos/id/338/200/200" Stretch="UniformToFill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
+                        <Border Width="86" Height="86" CornerRadius="43" Background="{StaticResource BrandColorLight}" Margin="0,0,0,15" HorizontalAlignment="Center">
+                            <TextBlock x:Name="PreviewInitials" Text="♥" FontSize="30" FontWeight="Bold" Foreground="{StaticResource BrandColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
 
-                        <TextBlock Text="Анна Ковальчук" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource TextDark}"/>
-                        <TextBlock Text="REG-045 • Реєстрація: 12.02.2026" FontSize="11" Foreground="#95A5A6" HorizontalAlignment="Center" Margin="0,2,0,15"/>
+                        <TextBlock x:Name="PreviewFullName" Text="Клієнта не обрано" FontSize="17" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource TextDark}"/>
+                        <TextBlock x:Name="PreviewMeta" Text="—" FontSize="11" Foreground="#95A5A6" HorizontalAlignment="Center" Margin="0,3,0,15"/>
 
                         <Border Background="#F9FAFB" CornerRadius="8" Padding="12" Margin="0,0,0,12">
                             <StackPanel>
                                 <TextBlock Text="📖 Відомості про себе:" FontWeight="Bold" FontSize="12" Foreground="#333" Margin="0,0,0,5"/>
-                                <TextBlock Text="Архітектор, люблю активний відпочинок, подорожі та ранкову каву. Шукаю надійну людину для створення сім'ї." 
-                                           FontSize="12" Foreground="#666" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="PreviewDetails" Text="Інформація відсутня." FontSize="12" Foreground="#666" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="{StaticResource BrandColorLight}" CornerRadius="8" Padding="12">
                             <StackPanel>
                                 <TextBlock Text="🎯 Вимоги до партнера:" FontWeight="Bold" FontSize="12" Foreground="{StaticResource BrandColor}" Margin="0,0,0,5"/>
-                                <TextBlock Text="• Бажана стать: Чоловіча&#x0a;• Вік: від 26 до 35 років&#x0a;• Критерії: Ввічливий, без шкідливих звичок, з вищою освітою." 
-                                           FontSize="12" Foreground="#555" TextWrapping="Wrap" LineHeight="18"/>
+                                <TextBlock x:Name="PreviewRequirements" Text="—" FontSize="12" Foreground="#555" TextWrapping="Wrap" LineHeight="18"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </ScrollViewer>
 
                 <StackPanel Grid.Row="2" Margin="0,15,0,0">
-                    <Button x:Name="BtnArchiveCouple" 
-                            Content="💍 Перенести пару в архів" 
-                            Height="36" Background="#3498DB" 
-                            Style="{StaticResource ActionButtonStyle}" 
+                    <Button x:Name="BtnArchiveCouple"
+                            Content="💍 Перенести пару в архів"
+                            Height="36" Background="#3498DB"
+                            Style="{StaticResource ActionButtonStyle}"
                             Margin="0,0,0,8"/>
 
-                    <Button x:Name="BtnDeleteClient" 
-                            Content="🗑️ Видалити клієнта (відмова)" 
-                            Height="36" Background="#FADBD8" Foreground="#C0392B" 
+                    <Button x:Name="BtnDeleteClient"
+                            Content="🗑️ Видалити клієнта (відмова)"
+                            Height="36" Background="#FADBD8" Foreground="#C0392B"
                             Style="{StaticResource ActionButtonStyle}"/>
                 </StackPanel>
             </Grid>

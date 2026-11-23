@@ -1,0 +1,339 @@
+﻿<UserControl x:Class="CourseApp.windows.views.ClientProfilesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#F7F8FA">
+
+    <UserControl.Resources>
+        <Style x:Key="ModernComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="ItemBorder" Background="Transparent" CornerRadius="6" Padding="{TemplateBinding Padding}" Margin="3,1">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#FFF0F3"/>
+                                <Setter Property="Foreground" Value="#FF4B72"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#FFF0F3"/>
+                                <Setter Property="Foreground" Value="#FF4B72"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ModernComboBoxItemStyle}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Focusable="False"
+                                          ClickMode="Press"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="MainBorder"
+                                                Background="#F7F8FA"
+                                                BorderBrush="#EAEAEA"
+                                                BorderThickness="1"
+                                                CornerRadius="8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="28"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path x:Name="Arrow"
+                                                      Grid.Column="1"
+                                                      Data="M 0 0 L 4 4 L 8 0"
+                                                      Stroke="#7F8C8D"
+                                                      StrokeThickness="1.6"
+                                                      StrokeStartLineCap="Round"
+                                                      StrokeEndLineCap="Round"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="MainBorder" Property="Background" Value="White"/>
+                                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#FFB3C3"/>
+                                                <Setter TargetName="Arrow" Property="Stroke" Value="#FF4B72"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="MainBorder" Property="Background" Value="White"/>
+                                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#FF4B72"/>
+                                                <Setter TargetName="Arrow" Property="Stroke" Value="#FF4B72"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+
+                            <ContentPresenter IsHitTestVisible="False"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                              Margin="12,0,28,0"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Border Background="White"
+                                        BorderBrush="#EAEAEA"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        MinWidth="{TemplateBinding ActualWidth}"
+                                        Margin="0,4,0,8"
+                                        Padding="0,3">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="12" ShadowDepth="3" Direction="270" Color="#18000000"/>
+                                    </Border.Effect>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,14">
+            <StackPanel>
+                <TextBlock Text="👥 Client Profiles — База клієнтів" FontSize="20" FontWeight="Bold" Foreground="#2C3E50"/>
+                <TextBlock Text="Повний список усіх зареєстрованих клієнтів бюро знайомств" FontSize="12" Foreground="#7F8C8D" Margin="0,3,0,0"/>
+            </StackPanel>
+
+            <Border Background="#FFF0F3" CornerRadius="12" Padding="12,6" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock x:Name="TxtClientsCount" Text="Знайдено: 0" Foreground="#FF4B72" FontWeight="Bold" FontSize="12"/>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="10" Margin="0,0,0,14" BorderBrush="#EAEAEA" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="#F7F8FA" CornerRadius="8" BorderBrush="#EAEAEA" BorderThickness="1" Height="34">
+                    <Grid>
+                        <TextBox x:Name="SearchTextBox"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Padding="10,0"
+                                 FontSize="13"
+                                 Foreground="#2C3E50"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="Filter_Changed"/>
+                        <TextBlock Text="🔍 Пошук за ПІБ або реєстраційним номером..."
+                                   Foreground="#95A5A6"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0"
+                                   IsHitTestVisible="False">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+
+                <ComboBox x:Name="GenderFilterComboBox" Grid.Column="1" Width="120" Height="34" Margin="10,0,0,0"
+                          Style="{StaticResource ModernComboBoxStyle}" SelectedIndex="0" SelectionChanged="Filter_Changed">
+                    <ComboBoxItem Content="Всі статі"/>
+                    <ComboBoxItem Content="Чоловіча"/>
+                    <ComboBoxItem Content="Жіноча"/>
+                </ComboBox>
+
+                <ComboBox x:Name="StatusFilterComboBox" Grid.Column="2" Width="125" Height="34" Margin="8,0,0,0"
+                          Style="{StaticResource ModernComboBoxStyle}" SelectedIndex="0" SelectionChanged="Filter_Changed">
+                    <ComboBoxItem Content="Всі статуси"/>
+                    <ComboBoxItem Content="Active"/>
+                    <ComboBoxItem Content="Archived"/>
+                    <ComboBoxItem Content="Deleted"/>
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <ListBox x:Name="AllClientsListBox"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="4,2,6,10"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border x:Name="CardBorder"
+                                            Background="White"
+                                            BorderBrush="#EAEAEA"
+                                            BorderThickness="1.5"
+                                            CornerRadius="12"
+                                            Padding="16">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Color="#0D000000"/>
+                                        </Border.Effect>
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="#FFB3C3"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="#FF4B72"/>
+                                            <Setter TargetName="CardBorder" Property="Background" Value="#FFF9FA"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Width="48" Height="48" CornerRadius="24" Background="#FFF0F3" Margin="0,0,14,0" VerticalAlignment="Top">
+                                <TextBlock Text="👤" FontSize="20" Foreground="#FF4B72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+
+                            <StackPanel Grid.Column="1">
+                                <DockPanel Margin="0,0,0,6">
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border CornerRadius="6" Padding="8,3" Margin="0,0,6,0">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#E8F8F0"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Archived">
+                                                            <Setter Property="Background" Value="#EBF5FB"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Deleted">
+                                                            <Setter Property="Background" Value="#FDEDEC"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Text="{Binding Status}" FontSize="11" FontWeight="Bold">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="#27AE60"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Archived">
+                                                                <Setter Property="Foreground" Value="#2980B9"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Deleted">
+                                                                <Setter Property="Foreground" Value="#C0392B"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Border Background="#F2F4F7" CornerRadius="6" Padding="8,3">
+                                            <TextBlock Text="{Binding RegNumber}" FontSize="11" FontWeight="SemiBold" Foreground="#7F8C8D"/>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding FullName}" FontSize="15" FontWeight="Bold" Foreground="#2C3E50" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{Binding Age, StringFormat=', {0} р.'}" FontSize="15" FontWeight="SemiBold" Foreground="#FF4B72"/>
+                                    </StackPanel>
+                                </DockPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                    <Border Background="#FFF0F3" CornerRadius="6" Padding="8,2" Margin="0,0,10,0">
+                                        <TextBlock Text="{Binding Gender}" FontSize="11" FontWeight="SemiBold" Foreground="#FF4B72"/>
+                                    </Border>
+
+                                    <TextBlock Text="{Binding RegDate, StringFormat='📅 Реєстрація: {0:dd.MM.yyyy}'}"
+                                               FontSize="12" Foreground="#7F8C8D" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <TextBlock Text="{Binding PersonalDetails}"
+                                           FontSize="12.5"
+                                           Foreground="#555"
+                                           TextWrapping="Wrap"
+                                           MaxHeight="40"
+                                           TextTrimming="CharacterEllipsis">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding PersonalDetails}" Value="">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding PersonalDetails}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Border x:Name="EmptyStatePanel" Background="White" CornerRadius="12" Padding="30" Visibility="Collapsed">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Color="#10000000"/>
+                </Border.Effect>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="🔎" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="Клієнтів не знайдено" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Спробуйте змінити параметри пошуку або фільтри." FontSize="13" Foreground="#7F8C8D" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CourseApp.classes.enums;
 
 namespace CourseApp.classes.information
 {
@@ -9,7 +10,7 @@ namespace CourseApp.classes.information
         public Gender PreferredGender { get; set; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
-        public string CriteriaDescription { get; set; }
+        public string? CriteriaDescription { get; set; }
     }
 
 }

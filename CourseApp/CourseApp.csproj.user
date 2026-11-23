@@ -2,10 +2,34 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="windows\authentication\LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\authentication\RegisterWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="windows\mainmenu\AdminWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="windows\mainmenu\ClientWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\mainmenu\MeetingsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\views\ArchiveView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\views\ClientMatchesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\views\ClientMeetingsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\views\ClientProfilesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\views\ProfileMenuView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
