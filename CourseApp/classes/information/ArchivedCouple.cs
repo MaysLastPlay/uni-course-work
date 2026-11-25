@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CourseApp.classes.information
+﻿namespace CourseApp.classes.information
 {
     public class ArchivedCouple
     {

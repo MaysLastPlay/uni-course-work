@@ -1,0 +1,569 @@
+﻿<UserControl x:Class="CourseApp.windows.views.ClientSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11.5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#1E272E"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+
+        <Style x:Key="SearchInputBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#1E272E"/>
+            <Setter Property="Background" Value="#FFF0F5"/>
+            <Setter Property="BorderBrush" Value="#FF85A1"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="BoxBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="10,0">
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BoxBorder" Property="Background" Value="#FFE4E1"/>
+                                <Setter TargetName="BoxBorder" Property="BorderBrush" Value="#FF2A55"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="BoxBorder" Property="Background" Value="#FFE4E1"/>
+                                <Setter TargetName="BoxBorder" Property="BorderBrush" Value="#FF2A55"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ResetButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FF2A55"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BtnBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                Padding="16,0">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Direction="270" Color="#40FF2A55"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BtnBorder" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FFC3A0" Offset="0.0"/>
+                <GradientStop Color="#FFAFBD" Offset="0.4"/>
+                <GradientStop Color="#D4A5FF" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0" Margin="0,0,0,14">
+                <Border DockPanel.Dock="Right"
+                        Background="#FFD6E0"
+                        BorderBrush="#FF85A1"
+                        BorderThickness="1.5"
+                        CornerRadius="12"
+                        Padding="12,6"
+                        VerticalAlignment="Center"
+                        Margin="12,0,0,0">
+                    <TextBlock x:Name="TxtResultsCount"
+                               Text="{Binding ResultsCount}"
+                               FontSize="12"
+                               FontWeight="Bold"
+                               Foreground="#FF2A55"/>
+                </Border>
+
+                <StackPanel>
+                    <TextBlock Text="🔍 Розширений пошук анкет"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#1E272E"/>
+                    <TextBlock Text="Фільтрація партнерів за зростом, вагою, віком та захопленнями"
+                               FontSize="12.5"
+                               FontWeight="Bold"
+                               Foreground="#2D3436"
+                               Margin="0,3,0,0"/>
+                </StackPanel>
+            </DockPanel>
+
+            <Border Grid.Row="1"
+                    BorderBrush="#FF85A1"
+                    BorderThickness="2"
+                    CornerRadius="18"
+                    ClipToBounds="True"
+                    Margin="0,0,0,14">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="22" ShadowDepth="4" Direction="270" Color="#35FF2A55"/>
+                </Border.Effect>
+                <Grid>
+                    <Border>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FFFCE4" Offset="0.0"/>
+                                <GradientStop Color="#FFE4E1" Offset="0.55"/>
+                                <GradientStop Color="#FFD3E2" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <Canvas IsHitTestVisible="False">
+                        <Ellipse Width="180" Height="180" Fill="#FF2A55" Canvas.Left="-45" Canvas.Top="-45" Opacity="0.22">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="60"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Ellipse Width="160" Height="160" Fill="#C77DFF" Canvas.Right="-40" Canvas.Bottom="-40" Opacity="0.22">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="60"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                    </Canvas>
+
+                    <StackPanel Margin="16">
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Ім'я або хобі" Style="{StaticResource FieldLabelStyle}"/>
+                                <Grid>
+                                    <TextBox x:Name="SearchBox"
+                                             Style="{StaticResource SearchInputBoxStyle}"
+                                             Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="Наприклад: Малювання, Програмування..."
+                                               FontSize="12"
+                                               FontWeight="SemiBold"
+                                               Foreground="#636E72"
+                                               VerticalAlignment="Center"
+                                               Margin="11,0,0,0"
+                                               IsHitTestVisible="False">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Зріст від (см)" Style="{StaticResource FieldLabelStyle}"/>
+                                <Grid>
+                                    <TextBox x:Name="MinHeightBox"
+                                             Style="{StaticResource SearchInputBoxStyle}"
+                                             Text="{Binding MinHeight, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="150"
+                                               FontSize="12"
+                                               Foreground="#636E72"
+                                               VerticalAlignment="Center"
+                                               Margin="11,0,0,0"
+                                               IsHitTestVisible="False">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=MinHeightBox}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="Зріст до (см)" Style="{StaticResource FieldLabelStyle}"/>
+                                <Grid>
+                                    <TextBox x:Name="MaxHeightBox"
+                                             Style="{StaticResource SearchInputBoxStyle}"
+                                             Text="{Binding MaxHeight, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="195"
+                                               FontSize="12"
+                                               Foreground="#636E72"
+                                               VerticalAlignment="Center"
+                                               Margin="11,0,0,0"
+                                               IsHitTestVisible="False">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=MaxHeightBox}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </StackPanel>
+
+                            <Button Grid.Column="6"
+                                    Content="↺ Скинути"
+                                    Style="{StaticResource ResetButtonStyle}"
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding ResetCommand}"/>
+                        </Grid>
+
+                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Вік:" Style="{StaticResource FieldLabelStyle}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBox x:Name="MinAgeBox" Width="62" Height="30" FontSize="12" FontWeight="SemiBold" Foreground="#1E272E" Background="#FFF0F5" BorderBrush="#FF85A1" BorderThickness="1.5" Padding="6,0" VerticalContentAlignment="Center" Margin="0,0,4,0" ToolTip="Мін. вік" Text="{Binding MinAge, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="—" FontWeight="Bold" Foreground="#1E272E" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                            <TextBox x:Name="MaxAgeBox" Width="62" Height="30" FontSize="12" FontWeight="SemiBold" Foreground="#1E272E" Background="#FFF0F5" BorderBrush="#FF85A1" BorderThickness="1.5" Padding="6,0" VerticalContentAlignment="Center" Margin="0,0,14,0" ToolTip="Макс. вік" Text="{Binding MaxAge, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="Вага до (кг):" Style="{StaticResource FieldLabelStyle}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBox x:Name="MaxWeightBox" Width="70" Height="30" FontSize="12" FontWeight="SemiBold" Foreground="#1E272E" Background="#FFF0F5" BorderBrush="#FF85A1" BorderThickness="1.5" Padding="6,0" VerticalContentAlignment="Center" Margin="0,0,14,0" ToolTip="Макс. вага (кг)" Text="{Binding MaxWeight, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <Grid Margin="0,0,8,0">
+                                <ToggleButton x:Name="SearchHobbiesPopupToggle"
+                                              Height="32"
+                                              MinWidth="220"
+                                              HorizontalContentAlignment="Stretch"
+                                              Cursor="Hand"
+                                              IsChecked="{Binding IsOpen, ElementName=SearchHobbiesPopup, Mode=TwoWay}">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="HobbyBtnBorder"
+                                                    Background="#FFF0F5"
+                                                    BorderBrush="#FF85A1"
+                                                    BorderThickness="1.5"
+                                                    CornerRadius="9"
+                                                    Padding="10,0">
+                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="HobbyBtnBorder" Property="Background" Value="#FFE4E1"/>
+                                                    <Setter TargetName="HobbyBtnBorder" Property="BorderBrush" Value="#FF2A55"/>
+                                                </Trigger>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="HobbyBtnBorder" Property="Background" Value="#FFE4E1"/>
+                                                    <Setter TargetName="HobbyBtnBorder" Property="BorderBrush" Value="#FF2A55"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="18"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock x:Name="SearchHobbiesSummaryText"
+                                                   Grid.Column="0"
+                                                   Text="{Binding HobbiesSummary}"
+                                                   FontSize="12"
+                                                   FontWeight="Bold"
+                                                   Foreground="#1E272E"
+                                                   VerticalAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis"/>
+
+                                        <Border Grid.Column="1"
+                                                Background="#FFD6E0"
+                                                CornerRadius="7"
+                                                Padding="6,1"
+                                                Margin="6,0"
+                                                VerticalAlignment="Center">
+                                            <TextBlock x:Name="SearchHobbiesCountBadge"
+                                                       Text="{Binding HobbiesCount}"
+                                                       FontSize="10.5"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FF2A55"/>
+                                        </Border>
+
+                                        <Path Grid.Column="2"
+                                              Data="M 0 0 L 4 4 L 8 0"
+                                              Stroke="#D63031"
+                                              StrokeThickness="2"
+                                              StrokeStartLineCap="Round"
+                                              StrokeEndLineCap="Round"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                    </Grid>
+                                </ToggleButton>
+
+                                <Popup x:Name="SearchHobbiesPopup"
+                                       PlacementTarget="{Binding ElementName=SearchHobbiesPopupToggle}"
+                                       Placement="Bottom"
+                                       StaysOpen="True"
+                                       AllowsTransparency="True"
+                                       PopupAnimation="Slide">
+                                    <Border Width="340"
+                                            Background="#FFFCE4"
+                                            BorderBrush="#FF2A55"
+                                            BorderThickness="2"
+                                            CornerRadius="14"
+                                            Padding="12"
+                                            Margin="0,6,0,10">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="20" ShadowDepth="4" Direction="270" Color="#45FF2A55"/>
+                                        </Border.Effect>
+
+                                        <StackPanel>
+                                            <TextBlock Text="Пошук хобі за літерою або словом"
+                                                       FontSize="11.5"
+                                                       FontWeight="Bold"
+                                                       Foreground="#8E44AD"
+                                                       Margin="0,0,0,6"/>
+
+                                            <Grid Margin="0,0,0,10">
+                                                <TextBox x:Name="HobbyLetterSearchBox"
+                                                         Height="32"
+                                                         FontSize="12"
+                                                         FontWeight="SemiBold"
+                                                         Foreground="#1E272E"
+                                                         Background="#FFF0F5"
+                                                         BorderBrush="#FF85A1"
+                                                         BorderThickness="1.5"
+                                                         Padding="8,0"
+                                                         VerticalContentAlignment="Center"
+                                                         Text="{Binding HobbyQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                                                <TextBlock Text="Введіть літеру, напр.: М, П, Ф..."
+                                                           FontSize="11.5"
+                                                           Foreground="#636E72"
+                                                           VerticalAlignment="Center"
+                                                           Margin="10,0,0,0"
+                                                           IsHitTestVisible="False">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Text, ElementName=HobbyLetterSearchBox}" Value="">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </Grid>
+
+                                            <ScrollViewer MaxHeight="200" VerticalScrollBarVisibility="Auto">
+                                                <ItemsControl x:Name="SearchHobbiesItemsControl" ItemsSource="{Binding Hobbies}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox Content="{Binding Title}"
+                                                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                                      Margin="0,0,12,8"
+                                                                      FontSize="12"
+                                                                      FontWeight="Bold"
+                                                                      Foreground="#1E272E"
+                                                                      Cursor="Hand"/>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </ScrollViewer>
+                                        </StackPanel>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </WrapPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="2">
+                <ListBox x:Name="ResultsListBox"
+                         ItemsSource="{Binding Results}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="2,0,4,10"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="CardBorder"
+                                                Background="#FFE4E1"
+                                                BorderBrush="#FF85A1"
+                                                BorderThickness="2"
+                                                CornerRadius="16"
+                                                Padding="14">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="14" ShadowDepth="3" Direction="270" Color="#25FF2A55"/>
+                                            </Border.Effect>
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="CardBorder" Property="Background" Value="#FFD3E2"/>
+                                                <Setter TargetName="CardBorder" Property="BorderBrush" Value="#FF2A55"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Width="54"
+                                        Height="54"
+                                        CornerRadius="27"
+                                        Background="#FFD6E0"
+                                        BorderBrush="#FF85A1"
+                                        BorderThickness="1.5"
+                                        Margin="0,0,14,0"
+                                        VerticalAlignment="Top"
+                                        ClipToBounds="True">
+                                    <Grid>
+                                        <TextBlock Text="♥" FontSize="22" Foreground="#FF2A55" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Image Source="{Binding AvatarPath}" Stretch="UniformToFill"/>
+                                    </Grid>
+                                </Border>
+
+                                <StackPanel Grid.Column="1">
+                                    <DockPanel Margin="0,0,0,6">
+                                        <Border DockPanel.Dock="Right"
+                                                Background="#FFD6E0"
+                                                CornerRadius="8"
+                                                Padding="8,3"
+                                                VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Gender}" FontSize="11" FontWeight="Bold" Foreground="#FF2A55"/>
+                                        </Border>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding FullName}" FontSize="15" FontWeight="Bold" Foreground="#1E272E"/>
+                                            <TextBlock Text="{Binding Age, StringFormat=', {0} р.'}" FontSize="15" FontWeight="Bold" Foreground="#FF2A55"/>
+                                        </StackPanel>
+                                    </DockPanel>
+
+                                    <WrapPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <Border Background="#FFF0F5" CornerRadius="6" Padding="8,2" Margin="0,0,8,4">
+                                            <TextBlock Text="{Binding HeightCm, StringFormat='📏 Зріст: {0} см'}" FontSize="11" FontWeight="Bold" Foreground="#1E272E">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding HeightCm}" Value="{x:Null}">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Border Background="#FFF0F5" CornerRadius="6" Padding="8,2" Margin="0,0,8,4">
+                                            <TextBlock Text="{Binding WeightKg, StringFormat='⚖️ Вага: {0} кг'}" FontSize="11" FontWeight="Bold" Foreground="#1E272E">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding WeightKg}" Value="{x:Null}">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+                                    </WrapPanel>
+
+                                    <ItemsControl ItemsSource="{Binding Hobbies}" Margin="0,0,0,4">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#F3E8FF" BorderBrush="#C77DFF" BorderThickness="1" CornerRadius="8" Padding="8,2" Margin="0,0,6,4">
+                                                    <TextBlock Text="{Binding StringFormat='🎯 {0}'}" FontSize="11" FontWeight="Bold" Foreground="#8E44AD"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock Text="{Binding PersonalDetails}"
+                                               FontSize="12.5"
+                                               FontWeight="SemiBold"
+                                               Foreground="#2D3436"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Border x:Name="EmptyStateBorder"
+                        Background="#FFE4E1"
+                        BorderBrush="#FF85A1"
+                        BorderThickness="2"
+                        CornerRadius="16"
+                        Padding="24"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="{Binding EmptyVisibility}">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="🔎" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                        <TextBlock Text="Анкет не знайдено" FontSize="15" FontWeight="Bold" Foreground="#1E272E" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Спробуйте змінити параметри фільтрації." FontSize="12.5" FontWeight="SemiBold" Foreground="#2D3436" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

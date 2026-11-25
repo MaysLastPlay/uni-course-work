@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CourseApp.classes.enums;
+﻿using CourseApp.classes.enums;
 
 namespace CourseApp.classes.information
 {

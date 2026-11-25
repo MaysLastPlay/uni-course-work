@@ -1,176 +1,189 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using CourseApp.classes.enums;
+using System.Windows.Media;
 using CourseApp.classes.information;
-using CourseApp.classes.services.CourseApp.classes;
+using CourseApp.classes.mvvm.viewmodels;
+using CourseApp.classes.services;
 
 namespace CourseApp.windows.views
 {
     public partial class ProfileMenuView : UserControl
     {
-        private readonly DatingService _datingService;
-        private readonly Action? _onProfileChanged;
-        private Client? _currentClient;
+        private readonly ProfileMenuViewModel _vm;
 
-        public ProfileMenuView(Client currentClient, DatingService datingService, Action? onProfileChanged = null)
+        public ProfileMenuView(Client currentClient, IClientService clients, IDialogService dialogs, Action? onChanged = null)
         {
             InitializeComponent();
-            _datingService = datingService;
-            _onProfileChanged = onProfileChanged;
-
-            LoadClientProfile(currentClient);
+            _vm = new ProfileMenuViewModel(clients, dialogs, onChanged, () => Window.GetWindow(this), currentClient);
+            DataContext = _vm;
         }
 
-        public ProfileMenuView(DatingService datingService, Action? onProfileChanged = null)
+        public ProfileMenuView(IClientService clients, IDialogService dialogs, Action? onChanged = null)
         {
             InitializeComponent();
-            _datingService = datingService;
-            _onProfileChanged = onProfileChanged;
+            _vm = new ProfileMenuViewModel(clients, dialogs, onChanged, () => Window.GetWindow(this));
+            DataContext = _vm;
+        }
 
-            for (int i = 0; i < _datingService.AllClients.Count; i++)
+        public void LoadClientProfile(Client client) => _vm.LoadProfile(client);
+
+        internal sealed class ChangePasswordDialog : Window
+        {
+            private readonly Client _client;
+            private readonly IClientService _clients;
+            private readonly IDialogService _dialogs;
+            private readonly PasswordBox _currentBox;
+            private readonly PasswordBox _newBox;
+            private readonly PasswordBox _confirmBox;
+
+            public ChangePasswordDialog(Client client, IClientService clients, IDialogService dialogs, Window? owner)
             {
-                if (_datingService.AllClients[i].Status == ClientStatus.Active)
+                _client = client;
+                _clients = clients;
+                _dialogs = dialogs;
+
+                Title = "Зміна пароля";
+                Width = 410;
+                Height = 320;
+                MinWidth = 360;
+                MinHeight = 300;
+                WindowStartupLocation = owner != null ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
+                ResizeMode = ResizeMode.NoResize;
+                if (owner != null) Owner = owner;
+
+                Background = new LinearGradientBrush(
+                    Color.FromRgb(0xFF, 0xC3, 0xA0),
+                    Color.FromRgb(0xD4, 0xA5, 0xFF),
+                    new Point(0, 0),
+                    new Point(1, 1));
+
+                Border card = new Border
                 {
-                    LoadClientProfile(_datingService.AllClients[i]);
-                    break;
-                }
-            }
-        }
+                    Background = new SolidColorBrush(Color.FromRgb(0xFF, 0xE4, 0xE1)),
+                    BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0x85, 0xA1)),
+                    BorderThickness = new Thickness(2),
+                    CornerRadius = new CornerRadius(16),
+                    Padding = new Thickness(18),
+                    Margin = new Thickness(14)
+                };
 
-        public void LoadClientProfile(Client client)
-        {
-            _currentClient = client;
-            if (_currentClient == null) return;
-
-            FullNameBox.Text = _currentClient.FullName ?? "";
-            AgeBox.Text = _currentClient.Age.ToString();
-            PersonalDetailsBox.Text = _currentClient.PersonalDetails ?? "";
-
-            CurrentPasswordBox.Password = "";
-            NewPasswordBox.Password = "";
-            ConfirmPasswordBox.Password = "";
-
-            if (_currentClient.Requirements != null)
-            {
-                int genderIndex = (int)_currentClient.Requirements.PreferredGender;
-                PrefGenderComboBox.SelectedIndex = genderIndex >= 0 && genderIndex < PrefGenderComboBox.Items.Count
-                    ? genderIndex
-                    : 0;
-
-                MinAgeBox.Text = _currentClient.Requirements.MinAge.ToString();
-                MaxAgeBox.Text = _currentClient.Requirements.MaxAge.ToString();
-                CriteriaBox.Text = _currentClient.Requirements.CriteriaDescription ?? "";
-            }
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_currentClient == null) return;
-
-            string fullName = FullNameBox.Text.Trim();
-            if (string.IsNullOrWhiteSpace(fullName))
-            {
-                MessageBox.Show("Введіть ПІБ клієнта.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (!int.TryParse(AgeBox.Text.Trim(), out int age) || age < 18)
-            {
-                MessageBox.Show("Вік клієнта має бути числом від 18 років.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (!int.TryParse(MinAgeBox.Text.Trim(), out int minAge) || minAge < 18)
-            {
-                MessageBox.Show("Мінімальний вік партнера має бути від 18 років.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (!int.TryParse(MaxAgeBox.Text.Trim(), out int maxAge) || maxAge < minAge)
-            {
-                MessageBox.Show("Максимальний вік не може бути меншим за мінімальний.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            _currentClient.FullName = fullName;
-            _currentClient.Age = age;
-            _currentClient.PersonalDetails = PersonalDetailsBox.Text.Trim();
-
-            if (_currentClient.Requirements != null)
-            {
-                if (PrefGenderComboBox.SelectedIndex >= 0)
+                StackPanel stack = new StackPanel();
+                stack.Children.Add(new TextBlock
                 {
-                    _currentClient.Requirements.PreferredGender = (Gender)PrefGenderComboBox.SelectedIndex;
+                    Text = "🔑 Зміна пароля акаунту",
+                    FontSize = 17,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0xD6, 0x30, 0x31)),
+                    Margin = new Thickness(0, 0, 0, 12)
+                });
+
+                stack.Children.Add(CreateLabel("Поточний пароль*"));
+                _currentBox = CreatePasswordBox();
+                stack.Children.Add(_currentBox);
+
+                stack.Children.Add(CreateLabel("Новий пароль (мін. 4 символи)*"));
+                _newBox = CreatePasswordBox();
+                stack.Children.Add(_newBox);
+
+                stack.Children.Add(CreateLabel("Підтвердьте новий пароль*"));
+                _confirmBox = CreatePasswordBox();
+                stack.Children.Add(_confirmBox);
+
+                StackPanel buttonsPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Margin = new Thickness(0, 14, 0, 0)
+                };
+
+                Button cancelBtn = new Button
+                {
+                    Content = "Скасувати",
+                    Height = 36,
+                    Margin = new Thickness(0, 0, 10, 0),
+                    FontWeight = FontWeights.Bold,
+                    Background = new SolidColorBrush(Color.FromRgb(0xFF, 0xB3, 0xC6)),
+                    Foreground = new SolidColorBrush(Color.FromRgb(0x1E, 0x27, 0x2E)),
+                    Cursor = System.Windows.Input.Cursors.Hand
+                };
+                cancelBtn.Click += (_, _) => DialogResult = false;
+
+                Button saveBtn = new Button
+                {
+                    Content = "Зберегти пароль",
+                    Height = 36,
+                    FontWeight = FontWeights.Bold,
+                    Background = new SolidColorBrush(Color.FromRgb(0xFF, 0x2A, 0x55)),
+                    Foreground = Brushes.White,
+                    Cursor = System.Windows.Input.Cursors.Hand
+                };
+                saveBtn.Click += SavePassword_Click;
+
+                buttonsPanel.Children.Add(cancelBtn);
+                buttonsPanel.Children.Add(saveBtn);
+                stack.Children.Add(buttonsPanel);
+
+                card.Child = stack;
+                Content = card;
+            }
+
+            private static TextBlock CreateLabel(string text) => new TextBlock
+            {
+                Text = text,
+                FontSize = 12,
+                FontWeight = FontWeights.Bold,
+                Foreground = new SolidColorBrush(Color.FromRgb(0x1E, 0x27, 0x2E)),
+                Margin = new Thickness(0, 0, 0, 4)
+            };
+
+            private static PasswordBox CreatePasswordBox() => new PasswordBox
+            {
+                Height = 34,
+                FontSize = 12.5,
+                Background = new SolidColorBrush(Color.FromRgb(0xFF, 0xF0, 0xF5)),
+                BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0x85, 0xA1)),
+                BorderThickness = new Thickness(1.5),
+                Padding = new Thickness(8, 5, 8, 5),
+                Margin = new Thickness(0, 0, 0, 8)
+            };
+
+            private void SavePassword_Click(object sender, RoutedEventArgs e)
+            {
+                string currentPassword = _currentBox.Password;
+                string newPassword = _newBox.Password;
+                string confirmPassword = _confirmBox.Password;
+
+                if (currentPassword != (_client.Password ?? string.Empty))
+                {
+                    _dialogs.Warn("Поточний пароль введено неправильно.", "Помилка");
+                    return;
                 }
 
-                _currentClient.Requirements.MinAge = minAge;
-                _currentClient.Requirements.MaxAge = maxAge;
-                _currentClient.Requirements.CriteriaDescription = CriteriaBox.Text.Trim();
+                if (string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < 4)
+                {
+                    _dialogs.Warn("Новий пароль має містити щонайменше 4 символи.", "Помилка валідації");
+                    return;
+                }
+
+                if (newPassword != confirmPassword)
+                {
+                    _dialogs.Warn("Новий пароль та підтвердження не збігаються.", "Помилка валідації");
+                    return;
+                }
+
+                if (newPassword == currentPassword)
+                {
+                    _dialogs.Warn("Новий пароль має відрізнятися від поточного.", "Помилка валідації");
+                    return;
+                }
+
+                _client.Password = newPassword;
+                _clients.Save();
+
+                _dialogs.Info("Пароль успішно змінено!", "Безпека");
+                DialogResult = true;
             }
-
-            _datingService.SaveClients();
-            _onProfileChanged?.Invoke();
-
-            MessageBox.Show("Зміни профілю успішно збережено!", "Збережено", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_currentClient == null) return;
-
-            string currentPassword = CurrentPasswordBox.Password;
-            string newPassword = NewPasswordBox.Password;
-            string confirmPassword = ConfirmPasswordBox.Password;
-
-            if (currentPassword != (_currentClient.Password ?? ""))
-            {
-                MessageBox.Show("Поточний пароль введено неправильно.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < 4)
-            {
-                MessageBox.Show("Новий пароль має містити щонайменше 4 символи.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (newPassword != confirmPassword)
-            {
-                MessageBox.Show("Новий пароль та підтвердження не збігаються.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (newPassword == currentPassword)
-            {
-                MessageBox.Show("Новий пароль має відрізнятися від поточного.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            _currentClient.Password = newPassword;
-            _datingService.SaveClients();
-
-            CurrentPasswordBox.Password = "";
-            NewPasswordBox.Password = "";
-            ConfirmPasswordBox.Password = "";
-
-            MessageBox.Show("Пароль успішно змінено!", "Безпека", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private void DeactivateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_currentClient == null || string.IsNullOrWhiteSpace(_currentClient.RegNumber)) return;
-
-            MessageBoxResult confirm = MessageBox.Show(
-                "Ви дійсно бажаєте деактивувати свій акаунт? Ви вийдете з системи, а профіль переміститься до списку вилучених.",
-                "Деактивація акаунту",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning);
-
-            if (confirm != MessageBoxResult.Yes) return;
-
-            _datingService.DeleteClient(_currentClient.RegNumber, "Деактивація профілю клієнтом");
-            _onProfileChanged?.Invoke();
         }
     }
 }

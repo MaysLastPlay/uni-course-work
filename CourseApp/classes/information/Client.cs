@@ -1,7 +1,5 @@
-﻿using System;
+﻿using CourseApp.classes.enums;
 using System.Collections.Generic;
-using System.Text;
-using CourseApp.classes.enums;
 
 namespace CourseApp.classes.information
 {
@@ -16,11 +14,15 @@ namespace CourseApp.classes.information
         public DateTime RegDate { get; set; }
         public string? PersonalDetails { get; set; }
         public PRequirements? Requirements { get; set; }
-
         public string? Reason { get; set; }
-
         public ClientStatus Status { get; set; } = ClientStatus.Active;
 
         public override string ToString() => $"{RegNumber} | {FullName} ({Gender}, {Age}р.)";
-    }
+        public string? AvatarPath { get; set; }
+        
+        public List<string> PhotoPaths { get; set; } = new List<string>();
+        public int? HeightCm { get; set; }
+        public double? WeightKg { get; set; }
+        public List<string> Hobbies { get; set; } = new List<string>();
 }
+    }
