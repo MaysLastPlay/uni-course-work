@@ -9,13 +9,6 @@ using CourseApp.classes.services;
 
 namespace CourseApp.classes.mvvm.viewmodels
 {
-    public enum MeetingFilterMode
-    {
-        All,
-        Pending,
-        Accepted,
-        Rejected
-    }
 
     public class MeetingsWindowViewModel : ObservableObject
     {
@@ -33,12 +26,12 @@ namespace CourseApp.classes.mvvm.viewmodels
 
         public ObservableCollection<MeetingInvitation> FilteredMeetings { get; } = new ObservableCollection<MeetingInvitation>();
 
-        public string TitleText { get => _titleText; private set => SetProperty(ref _titleText, value); }
-        public MeetingFilterMode SelectedFilter { get => _filter; set { if (SetProperty(ref _filter, value)) Load(); } }
-        public MeetingInvitation? SelectedMeeting { get => _selected; set => SetProperty(ref _selected, value); }
-        public string MeetingsCountText { get => _countText; private set => SetProperty(ref _countText, value); }
-        public Visibility EmptyVisibility { get => _emptyVisibility; private set => SetProperty(ref _emptyVisibility, value); }
-        public Visibility ListVisibility { get => _listVisibility; private set => SetProperty(ref _listVisibility, value); }
+        public string TitleText { get => _titleText; private set { _titleText = value; OnPropertyChanged(); } }
+        public MeetingFilterMode SelectedFilter { get => _filter; set { _filter = value; OnPropertyChanged(); Load(); } }
+        public MeetingInvitation? SelectedMeeting { get => _selected; set { _selected = value; OnPropertyChanged(); } }
+        public string MeetingsCountText { get => _countText; private set { _countText = value; OnPropertyChanged(); } }
+        public Visibility EmptyVisibility { get => _emptyVisibility; private set { _emptyVisibility = value; OnPropertyChanged(); } }
+        public Visibility ListVisibility { get => _listVisibility; private set { _listVisibility = value; OnPropertyChanged(); } }
 
         public ICommand SetFilterCommand { get; }
         public ICommand AcceptCommand { get; }

@@ -20,13 +20,13 @@ namespace CourseApp.classes.mvvm.viewmodels
 
         public ObservableCollection<Client> Clients { get; } = new ObservableCollection<Client>();
 
-        public string Query { get => _query; set { if (SetProperty(ref _query, value)) Filter(); } }
-        public int GenderIndex { get => _genderIndex; set { if (SetProperty(ref _genderIndex, value)) Filter(); } }
-        public int StatusIndex { get => _statusIndex; set { if (SetProperty(ref _statusIndex, value)) Filter(); } }
+        public string Query { get => _query; set { _query = value; OnPropertyChanged(); Filter(); } }
+        public int GenderIndex { get => _genderIndex; set { _genderIndex = value; OnPropertyChanged(); Filter(); } }
+        public int StatusIndex { get => _statusIndex; set { _statusIndex = value; OnPropertyChanged(); Filter(); } }
 
-        public string CountText { get => _countText; private set => SetProperty(ref _countText, value); }
-        public Visibility EmptyVisibility { get => _emptyVisibility; private set => SetProperty(ref _emptyVisibility, value); }
-        public Visibility ListVisibility { get => _listVisibility; private set => SetProperty(ref _listVisibility, value); }
+        public string CountText { get => _countText; private set { _countText = value; OnPropertyChanged(); } }
+        public Visibility EmptyVisibility { get => _emptyVisibility; private set { _emptyVisibility = value; OnPropertyChanged(); } }
+        public Visibility ListVisibility { get => _listVisibility; private set { _listVisibility = value; OnPropertyChanged(); } }
 
         public ClientProfilesViewModel(IClientService clients)
         {

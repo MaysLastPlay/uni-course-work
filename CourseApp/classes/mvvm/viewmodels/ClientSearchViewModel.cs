@@ -20,7 +20,7 @@ namespace CourseApp.classes.mvvm.viewmodels
         public bool IsSelected
         {
             get => _isSelected;
-            set { if (SetProperty(ref _isSelected, value)) _onToggle(); }
+            set { _isSelected = value; OnPropertyChanged(); _onToggle(); }
         }
 
         public HobbyOption(string title, Action onToggle)
@@ -60,18 +60,18 @@ namespace CourseApp.classes.mvvm.viewmodels
         public ObservableCollection<Client> Results { get; } = new ObservableCollection<Client>();
         public ObservableCollection<HobbyOption> Hobbies { get; } = new ObservableCollection<HobbyOption>();
 
-        public string Query { get => _query; set { if (SetProperty(ref _query, value)) Filter(); } }
-        public string MinHeight { get => _minHeight; set { if (SetProperty(ref _minHeight, value)) Filter(); } }
-        public string MaxHeight { get => _maxHeight; set { if (SetProperty(ref _maxHeight, value)) Filter(); } }
-        public string MinAge { get => _minAge; set { if (SetProperty(ref _minAge, value)) Filter(); } }
-        public string MaxAge { get => _maxAge; set { if (SetProperty(ref _maxAge, value)) Filter(); } }
-        public string MaxWeight { get => _maxWeight; set { if (SetProperty(ref _maxWeight, value)) Filter(); } }
-        public string HobbyQuery { get => _hobbyQuery; set { if (SetProperty(ref _hobbyQuery, value)) UpdateHobbies(); } }
+        public string Query { get => _query; set { _query = value; OnPropertyChanged(); Filter(); } }
+        public string MinHeight { get => _minHeight; set { _minHeight = value; OnPropertyChanged(); Filter(); } }
+        public string MaxHeight { get => _maxHeight; set { _maxHeight = value; OnPropertyChanged(); Filter(); } }
+        public string MinAge { get => _minAge; set { _minAge = value; OnPropertyChanged(); Filter(); } }
+        public string MaxAge { get => _maxAge; set { _maxAge = value; OnPropertyChanged(); Filter(); } }
+        public string MaxWeight { get => _maxWeight; set { _maxWeight = value; OnPropertyChanged(); Filter(); } }
+        public string HobbyQuery { get => _hobbyQuery; set { _hobbyQuery = value; OnPropertyChanged(); UpdateHobbies(); } }
 
-        public string HobbiesSummary { get => _hobbiesSummary; private set => SetProperty(ref _hobbiesSummary, value); }
-        public string HobbiesCount { get => _hobbiesCount; private set => SetProperty(ref _hobbiesCount, value); }
-        public string ResultsCount { get => _resultsCount; private set => SetProperty(ref _resultsCount, value); }
-        public Visibility EmptyVisibility { get => _emptyVisibility; private set => SetProperty(ref _emptyVisibility, value); }
+        public string HobbiesSummary { get => _hobbiesSummary; private set { _hobbiesSummary = value; OnPropertyChanged(); } }
+        public string HobbiesCount { get => _hobbiesCount; private set { _hobbiesCount = value; OnPropertyChanged(); } }
+        public string ResultsCount { get => _resultsCount; private set { _resultsCount = value; OnPropertyChanged(); } }
+        public Visibility EmptyVisibility { get => _emptyVisibility; private set { _emptyVisibility = value; OnPropertyChanged(); } }
 
         public ICommand ResetCommand { get; }
 

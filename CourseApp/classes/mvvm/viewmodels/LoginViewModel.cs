@@ -22,9 +22,9 @@ namespace CourseApp.classes.mvvm.viewmodels
         private string _error = string.Empty;
         private Visibility _errorVisibility = Visibility.Collapsed;
 
-        public string Login { get => _login; set => SetProperty(ref _login, value); }
-        public string Error { get => _error; private set => SetProperty(ref _error, value); }
-        public Visibility ErrorVisibility { get => _errorVisibility; private set => SetProperty(ref _errorVisibility, value); }
+        public string Login { get => _login; set { _login = value; OnPropertyChanged(); } }
+        public string Error { get => _error; private set { _error = value; OnPropertyChanged(); } }
+        public Visibility ErrorVisibility { get => _errorVisibility; private set { _errorVisibility = value; OnPropertyChanged(); } }
 
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }

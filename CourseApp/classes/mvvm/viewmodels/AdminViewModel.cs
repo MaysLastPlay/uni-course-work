@@ -59,31 +59,31 @@ namespace CourseApp.classes.mvvm.viewmodels
         public ObservableCollection<Client> Candidates { get; } = new ObservableCollection<Client>();
         public ObservableCollection<string> PreviewHobbies { get; } = new ObservableCollection<string>();
 
-        public AdminNavSection Section { get => _section; private set => SetProperty(ref _section, value); }
-        public Client? ActiveClient { get => _activeClient; set { if (SetProperty(ref _activeClient, value)) OnClientChanged(); } }
-        public Client? SelectedCandidate { get => _selectedCandidate; set { if (SetProperty(ref _selectedCandidate, value)) SetPreview(value ?? ActiveClient); } }
+        public AdminNavSection Section { get => _section; private set { _section = value; OnPropertyChanged(); } }
+        public Client? ActiveClient { get => _activeClient; set { _activeClient = value; OnPropertyChanged(); OnClientChanged(); } }
+        public Client? SelectedCandidate { get => _selectedCandidate; set { _selectedCandidate = value; OnPropertyChanged(); SetPreview(value ?? ActiveClient); } }
 
-        public string StatsText { get => _statsText; private set => SetProperty(ref _statsText, value); }
-        public string CandidatesCount { get => _candidatesCount; private set => SetProperty(ref _candidatesCount, value); }
-        public Visibility SearchVisibility { get => _searchVisibility; private set => SetProperty(ref _searchVisibility, value); }
-        public Visibility HostVisibility { get => _hostVisibility; private set => SetProperty(ref _hostVisibility, value); }
-        public UserControl? CurrentView { get => _currentView; private set => SetProperty(ref _currentView, value); }
-        public Visibility EmptyVisibility { get => _emptyVisibility; private set => SetProperty(ref _emptyVisibility, value); }
-        public Visibility CandidatesVisibility { get => _candidatesVisibility; private set => SetProperty(ref _candidatesVisibility, value); }
+        public string StatsText { get => _statsText; private set { _statsText = value; OnPropertyChanged(); } }
+        public string CandidatesCount { get => _candidatesCount; private set { _candidatesCount = value; OnPropertyChanged(); } }
+        public Visibility SearchVisibility { get => _searchVisibility; private set { _searchVisibility = value; OnPropertyChanged(); } }
+        public Visibility HostVisibility { get => _hostVisibility; private set { _hostVisibility = value; OnPropertyChanged(); } }
+        public UserControl? CurrentView { get => _currentView; private set { _currentView = value; OnPropertyChanged(); } }
+        public Visibility EmptyVisibility { get => _emptyVisibility; private set { _emptyVisibility = value; OnPropertyChanged(); } }
+        public Visibility CandidatesVisibility { get => _candidatesVisibility; private set { _candidatesVisibility = value; OnPropertyChanged(); } }
 
-        public ImageSource? PreviewAvatar { get => _previewAvatar; private set => SetProperty(ref _previewAvatar, value); }
-        public Visibility PreviewAvatarVisibility { get => _previewAvatarVisibility; private set => SetProperty(ref _previewAvatarVisibility, value); }
-        public Visibility PreviewInitialsVisibility { get => _previewInitialsVisibility; private set => SetProperty(ref _previewInitialsVisibility, value); }
-        public string PreviewInitials { get => _previewInitials; private set => SetProperty(ref _previewInitials, value); }
-        public string PreviewName { get => _previewName; private set => SetProperty(ref _previewName, value); }
-        public string PreviewMeta { get => _previewMeta; private set => SetProperty(ref _previewMeta, value); }
-        public string PreviewHeight { get => _previewHeight; private set => SetProperty(ref _previewHeight, value); }
-        public Visibility PreviewHeightVisibility { get => _previewHeightVisibility; private set => SetProperty(ref _previewHeightVisibility, value); }
-        public string PreviewWeight { get => _previewWeight; private set => SetProperty(ref _previewWeight, value); }
-        public Visibility PreviewWeightVisibility { get => _previewWeightVisibility; private set => SetProperty(ref _previewWeightVisibility, value); }
-        public Visibility PreviewHobbiesVisibility { get => _previewHobbiesVisibility; private set => SetProperty(ref _previewHobbiesVisibility, value); }
-        public string PreviewDetails { get => _previewDetails; private set => SetProperty(ref _previewDetails, value); }
-        public string PreviewReqs { get => _previewReqs; private set => SetProperty(ref _previewReqs, value); }
+        public ImageSource? PreviewAvatar { get => _previewAvatar; private set { _previewAvatar = value; OnPropertyChanged(); } }
+        public Visibility PreviewAvatarVisibility { get => _previewAvatarVisibility; private set { _previewAvatarVisibility = value; OnPropertyChanged(); } }
+        public Visibility PreviewInitialsVisibility { get => _previewInitialsVisibility; private set { _previewInitialsVisibility = value; OnPropertyChanged(); } }
+        public string PreviewInitials { get => _previewInitials; private set { _previewInitials = value; OnPropertyChanged(); } }
+        public string PreviewName { get => _previewName; private set { _previewName = value; OnPropertyChanged(); } }
+        public string PreviewMeta { get => _previewMeta; private set { _previewMeta = value; OnPropertyChanged(); } }
+        public string PreviewHeight { get => _previewHeight; private set { _previewHeight = value; OnPropertyChanged(); } }
+        public Visibility PreviewHeightVisibility { get => _previewHeightVisibility; private set { _previewHeightVisibility = value; OnPropertyChanged(); } }
+        public string PreviewWeight { get => _previewWeight; private set { _previewWeight = value; OnPropertyChanged(); } }
+        public Visibility PreviewWeightVisibility { get => _previewWeightVisibility; private set { _previewWeightVisibility = value; OnPropertyChanged(); } }
+        public Visibility PreviewHobbiesVisibility { get => _previewHobbiesVisibility; private set { _previewHobbiesVisibility = value; OnPropertyChanged(); } }
+        public string PreviewDetails { get => _previewDetails; private set { _previewDetails = value; OnPropertyChanged(); } }
+        public string PreviewReqs { get => _previewReqs; private set { _previewReqs = value; OnPropertyChanged(); } }
 
         public ICommand NavigateCommand { get; }
         public ICommand OpenMeetingsCommand { get; }

@@ -311,6 +311,7 @@
                                             </StackPanel>
 
                                             <TextBlock Text="{Binding Reason, StringFormat='Причина вилучення: {0}'}" FontSize="12.5" FontWeight="Bold" Foreground="#D63031" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding DeletionCountdownText}" FontSize="12" FontWeight="Bold" Foreground="#8E44AD" Margin="0,4,0,0"/>
                                         </StackPanel>
 
                                         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0,0,0">

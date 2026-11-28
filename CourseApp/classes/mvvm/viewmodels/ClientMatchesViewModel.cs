@@ -32,15 +32,15 @@ namespace CourseApp.classes.mvvm.viewmodels
         public bool MutualOnly
         {
             get => _mutualOnly;
-            set { if (SetProperty(ref _mutualOnly, value)) Refresh(); }
+            set { _mutualOnly = value; OnPropertyChanged(); Refresh(); }
         }
 
-        public string SubtitleText { get => _subtitleText; private set => SetProperty(ref _subtitleText, value); }
-        public Visibility EmptyMatchesVisibility { get => _emptyMatchesVisibility; private set => SetProperty(ref _emptyMatchesVisibility, value); }
-        public Visibility InviteOverlayVisibility { get => _inviteOverlayVisibility; private set => SetProperty(ref _inviteOverlayVisibility, value); }
-        public string InviteTargetText { get => _inviteTargetText; private set => SetProperty(ref _inviteTargetText, value); }
-        public string InviteDate { get => _inviteDate; set => SetProperty(ref _inviteDate, value); }
-        public string InviteTime { get => _inviteTime; set => SetProperty(ref _inviteTime, value); }
+        public string SubtitleText { get => _subtitleText; private set { _subtitleText = value; OnPropertyChanged(); } }
+        public Visibility EmptyMatchesVisibility { get => _emptyMatchesVisibility; private set { _emptyMatchesVisibility = value; OnPropertyChanged(); } }
+        public Visibility InviteOverlayVisibility { get => _inviteOverlayVisibility; private set { _inviteOverlayVisibility = value; OnPropertyChanged(); } }
+        public string InviteTargetText { get => _inviteTargetText; private set { _inviteTargetText = value; OnPropertyChanged(); } }
+        public string InviteDate { get => _inviteDate; set { _inviteDate = value; OnPropertyChanged(); } }
+        public string InviteTime { get => _inviteTime; set { _inviteTime = value; OnPropertyChanged(); } }
 
         public ICommand RefreshCommand { get; }
         public ICommand OpenInviteCommand { get; }

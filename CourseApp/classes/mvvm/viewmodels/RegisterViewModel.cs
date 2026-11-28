@@ -29,18 +29,18 @@ namespace CourseApp.classes.mvvm.viewmodels
         private Visibility _step1Visibility = Visibility.Visible;
         private Visibility _step2Visibility = Visibility.Collapsed;
 
-        public string FullName { get => _fullName; set => SetProperty(ref _fullName, value); }
-        public int GenderIndex { get => _genderIndex; set => SetProperty(ref _genderIndex, value); }
-        public string Age { get => _age; set => SetProperty(ref _age, value); }
-        public string Email { get => _email; set => SetProperty(ref _email, value); }
+        public string FullName { get => _fullName; set { _fullName = value; OnPropertyChanged(); } }
+        public int GenderIndex { get => _genderIndex; set { _genderIndex = value; OnPropertyChanged(); } }
+        public string Age { get => _age; set { _age = value; OnPropertyChanged(); } }
+        public string Email { get => _email; set { _email = value; OnPropertyChanged(); } }
 
-        public string RegLabel { get => _regLabel; private set => SetProperty(ref _regLabel, value); }
-        public string StepTitle { get => _stepTitle; private set => SetProperty(ref _stepTitle, value); }
-        public string StepDots { get => _stepDots; private set => SetProperty(ref _stepDots, value); }
-        public string BackText { get => _backText; private set => SetProperty(ref _backText, value); }
-        public string NextText { get => _nextText; private set => SetProperty(ref _nextText, value); }
-        public Visibility Step1Visibility { get => _step1Visibility; private set => SetProperty(ref _step1Visibility, value); }
-        public Visibility Step2Visibility { get => _step2Visibility; private set => SetProperty(ref _step2Visibility, value); }
+        public string RegLabel { get => _regLabel; private set { _regLabel = value; OnPropertyChanged(); } }
+        public string StepTitle { get => _stepTitle; private set { _stepTitle = value; OnPropertyChanged(); } }
+        public string StepDots { get => _stepDots; private set { _stepDots = value; OnPropertyChanged(); } }
+        public string BackText { get => _backText; private set { _backText = value; OnPropertyChanged(); } }
+        public string NextText { get => _nextText; private set { _nextText = value; OnPropertyChanged(); } }
+        public Visibility Step1Visibility { get => _step1Visibility; private set { _step1Visibility = value; OnPropertyChanged(); } }
+        public Visibility Step2Visibility { get => _step2Visibility; private set { _step2Visibility = value; OnPropertyChanged(); } }
 
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }

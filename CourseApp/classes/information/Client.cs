@@ -1,5 +1,5 @@
 ﻿using CourseApp.classes.enums;
-using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CourseApp.classes.information
 {
@@ -19,10 +19,28 @@ namespace CourseApp.classes.information
 
         public override string ToString() => $"{RegNumber} | {FullName} ({Gender}, {Age}р.)";
         public string? AvatarPath { get; set; }
-        
+
         public List<string> PhotoPaths { get; set; } = new List<string>();
         public int? HeightCm { get; set; }
         public double? WeightKg { get; set; }
         public List<string> Hobbies { get; set; } = new List<string>();
-}
+        public DateTime? DeletedAt { get; set; }
+
+        [JsonIgnore]
+        public string DeletionCountdownText
+        {
+            get
+            {
+                if (!DeletedAt.HasValue) return "Автовидалення через 14 дн.";
+
+                TimeSpan remaining = DeletedAt.Value.AddDays(14) - DateTime.Now;
+                if (remaining.TotalSeconds <= 0) return "Термін вийшов (буде видалено)";
+
+                if (remaining.Days >= 1)
+                    return $"⏳ До автовидалення: {remaining.Days} дн. {remaining.Hours} год.";
+
+                return $"⏳ До автовидалення: {remaining.Hours} год. {remaining.Minutes} хв.";
+            }
+        }
     }
+}

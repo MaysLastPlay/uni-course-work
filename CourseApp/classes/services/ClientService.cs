@@ -17,6 +17,7 @@ namespace CourseApp.classes.services
         public ObservableCollection<Client> All { get; } = new ObservableCollection<Client>();
         public ObservableCollection<Client> Deleted { get; } = new ObservableCollection<Client>();
         public ObservableCollection<ArchivedCouple> Archived { get; } = new ObservableCollection<ArchivedCouple>();
+        private const int DeleteRetentionDays = 14;
 
         public ClientService(IStorage storage)
         {
@@ -27,6 +28,7 @@ namespace CourseApp.classes.services
             foreach (ArchivedCouple a in _storage.Load<ArchivedCouple>(ArchiveFile)) Archived.Add(a);
 
             SyncDeleted();
+            PurgeExpiredDeleted();
         }
 
         public void Save() => _storage.Save(ClientsFile, All);
@@ -99,6 +101,7 @@ namespace CourseApp.classes.services
 
             target.Status = ClientStatus.Deleted;
             target.Reason = reason;
+            target.DeletedAt = DateTime.Now;
 
             All.Remove(target);
             Deleted.Add(target);
@@ -133,6 +136,7 @@ namespace CourseApp.classes.services
 
             client.Status = ClientStatus.Active;
             client.Reason = null;
+            client.DeletedAt = null;
 
             foreach (Client item in removed) Deleted.Remove(item);
             if (active == null) All.Add(client);
@@ -169,6 +173,35 @@ namespace CourseApp.classes.services
             if (fromAll.Count > 0) Save();
 
             return true;
+        }
+
+        private void PurgeExpiredDeleted()
+        {
+            DateTime now = DateTime.Now;
+            List<Client> expired = new List<Client>();
+            bool changed = false;
+
+            foreach (Client c in Deleted)
+            {
+                if (!c.DeletedAt.HasValue)
+                {
+                    c.DeletedAt = now;
+                    changed = true;
+                    continue;
+                }
+
+                if ((now - c.DeletedAt.Value).TotalDays >= DeleteRetentionDays)
+                    expired.Add(c);
+            }
+
+            foreach (Client item in expired)
+            {
+                Deleted.Remove(item);
+                changed = true;
+            }
+
+            if (changed)
+                _storage.Save(DeletedFile, Deleted);
         }
 
         private bool Exists(string? regNumber)

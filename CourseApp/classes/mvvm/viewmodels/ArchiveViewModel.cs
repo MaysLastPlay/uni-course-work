@@ -32,16 +32,16 @@ namespace CourseApp.classes.mvvm.viewmodels
         public int TabIndex
         {
             get => _tabIndex;
-            set { if (SetProperty(ref _tabIndex, value)) TabChanged?.Invoke(value); }
+            set { _tabIndex = value; OnPropertyChanged(); TabChanged?.Invoke(value); }
         }
 
-        public Client? Partner1 { get => _partner1; set => SetProperty(ref _partner1, value); }
-        public Client? Partner2 { get => _partner2; set => SetProperty(ref _partner2, value); }
+        public Client? Partner1 { get => _partner1; set { _partner1 = value; OnPropertyChanged(); } }
+        public Client? Partner2 { get => _partner2; set { _partner2 = value; OnPropertyChanged(); } }
 
-        public Visibility EmptyCouplesVisibility { get => _emptyCouplesVisibility; private set => SetProperty(ref _emptyCouplesVisibility, value); }
-        public Visibility CouplesVisibility { get => _couplesVisibility; private set => SetProperty(ref _couplesVisibility, value); }
-        public Visibility EmptyDeletedVisibility { get => _emptyDeletedVisibility; private set => SetProperty(ref _emptyDeletedVisibility, value); }
-        public Visibility DeletedVisibility { get => _deletedVisibility; private set => SetProperty(ref _deletedVisibility, value); }
+        public Visibility EmptyCouplesVisibility { get => _emptyCouplesVisibility; private set { _emptyCouplesVisibility = value; OnPropertyChanged(); } }
+        public Visibility CouplesVisibility { get => _couplesVisibility; private set { _couplesVisibility = value; OnPropertyChanged(); } }
+        public Visibility EmptyDeletedVisibility { get => _emptyDeletedVisibility; private set { _emptyDeletedVisibility = value; OnPropertyChanged(); } }
+        public Visibility DeletedVisibility { get => _deletedVisibility; private set { _deletedVisibility = value; OnPropertyChanged(); } }
 
         public ICommand ArchiveCommand { get; }
         public ICommand RestoreCommand { get; }

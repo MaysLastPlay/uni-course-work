@@ -24,9 +24,9 @@ namespace CourseApp.classes.mvvm.viewmodels
         public ObservableCollection<MeetingDisplayItem> ScheduledMeetings { get; } = new ObservableCollection<MeetingDisplayItem>();
         public ObservableCollection<MeetingDisplayItem> HistoryMeetings { get; } = new ObservableCollection<MeetingDisplayItem>();
 
-        public Visibility EmptyPendingVisibility { get => _emptyPendingVisibility; private set => SetProperty(ref _emptyPendingVisibility, value); }
-        public Visibility EmptyScheduledVisibility { get => _emptyScheduledVisibility; private set => SetProperty(ref _emptyScheduledVisibility, value); }
-        public Visibility EmptyHistoryVisibility { get => _emptyHistoryVisibility; private set => SetProperty(ref _emptyHistoryVisibility, value); }
+        public Visibility EmptyPendingVisibility { get => _emptyPendingVisibility; private set { _emptyPendingVisibility = value; OnPropertyChanged(); } }
+        public Visibility EmptyScheduledVisibility { get => _emptyScheduledVisibility; private set { _emptyScheduledVisibility = value; OnPropertyChanged(); } }
+        public Visibility EmptyHistoryVisibility { get => _emptyHistoryVisibility; private set { _emptyHistoryVisibility = value; OnPropertyChanged(); } }
 
         public ICommand AcceptCommand { get; }
         public ICommand DeclineCommand { get; }

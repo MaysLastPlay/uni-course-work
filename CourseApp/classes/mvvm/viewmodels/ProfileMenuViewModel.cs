@@ -46,21 +46,21 @@ namespace CourseApp.classes.mvvm.viewmodels
         public ObservableCollection<string> SelectedHobbies { get; } = new ObservableCollection<string>();
         public ObservableCollection<string> Photos { get; } = new ObservableCollection<string>();
 
-        public string FullName { get => _fullName; set => SetProperty(ref _fullName, value); }
-        public int GenderIndex { get => _genderIndex; set => SetProperty(ref _genderIndex, value); }
-        public string Age { get => _age; set => SetProperty(ref _age, value); }
-        public string Height { get => _height; set => SetProperty(ref _height, value); }
-        public string Weight { get => _weight; set => SetProperty(ref _weight, value); }
-        public string Details { get => _details; set => SetProperty(ref _details, value); }
+        public string FullName { get => _fullName; set { _fullName = value; OnPropertyChanged(); } }
+        public int GenderIndex { get => _genderIndex; set { _genderIndex = value; OnPropertyChanged(); } }
+        public string Age { get => _age; set { _age = value; OnPropertyChanged(); } }
+        public string Height { get => _height; set { _height = value; OnPropertyChanged(); } }
+        public string Weight { get => _weight; set { _weight = value; OnPropertyChanged(); } }
+        public string Details { get => _details; set { _details = value; OnPropertyChanged(); } }
 
-        public ImageSource? Avatar { get => _avatar; private set => SetProperty(ref _avatar, value); }
-        public Visibility AvatarVisibility { get => _avatarVisibility; private set => SetProperty(ref _avatarVisibility, value); }
-        public Visibility PlaceholderVisibility { get => _placeholderVisibility; private set => SetProperty(ref _placeholderVisibility, value); }
-        public string AvatarName { get => _avatarName; private set => SetProperty(ref _avatarName, value); }
-        public Visibility EmptyGalleryVisibility { get => _emptyGalleryVisibility; private set => SetProperty(ref _emptyGalleryVisibility, value); }
+        public ImageSource? Avatar { get => _avatar; private set { _avatar = value; OnPropertyChanged(); } }
+        public Visibility AvatarVisibility { get => _avatarVisibility; private set { _avatarVisibility = value; OnPropertyChanged(); } }
+        public Visibility PlaceholderVisibility { get => _placeholderVisibility; private set { _placeholderVisibility = value; OnPropertyChanged(); } }
+        public string AvatarName { get => _avatarName; private set { _avatarName = value; OnPropertyChanged(); } }
+        public Visibility EmptyGalleryVisibility { get => _emptyGalleryVisibility; private set { _emptyGalleryVisibility = value; OnPropertyChanged(); } }
 
-        public string HobbiesSummary { get => _hobbiesSummary; private set => SetProperty(ref _hobbiesSummary, value); }
-        public string HobbiesCount { get => _hobbiesCount; private set => SetProperty(ref _hobbiesCount, value); }
+        public string HobbiesSummary { get => _hobbiesSummary; private set { _hobbiesSummary = value; OnPropertyChanged(); } }
+        public string HobbiesCount { get => _hobbiesCount; private set { _hobbiesCount = value; OnPropertyChanged(); } }
 
         public ICommand PickAvatarCommand { get; }
         public ICommand ClearAvatarCommand { get; }

@@ -20,9 +20,9 @@ namespace CourseApp.classes.mvvm.viewmodels
         private string _meta = string.Empty;
         private UserControl? _activeView;
 
-        public string Name { get => _name; private set => SetProperty(ref _name, value); }
-        public string Meta { get => _meta; private set => SetProperty(ref _meta, value); }
-        public UserControl? ActiveView { get => _activeView; private set => SetProperty(ref _activeView, value); }
+        public string Name { get => _name; private set { _name = value; OnPropertyChanged(); } }
+        public string Meta { get => _meta; private set { _meta = value; OnPropertyChanged(); } }
+        public UserControl? ActiveView { get => _activeView; private set { _activeView = value; OnPropertyChanged(); } }
 
         public ICommand MatchesCommand { get; }
         public ICommand SearchCommand { get; }
